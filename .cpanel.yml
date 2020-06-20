@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/jvxkczxshosting/public_html/attendance
+    - /bin/cp -rf index.html $DEPLOYPATH
+    - /bin/cp -rf assets/css $DEPLOYPATH
+    - /bin/cp -rf assets/fonts $DEPLOYPATH
+    - /bin/cp -rf assets/scss $DEPLOYPATH
+    - /bin/cp -rf assets/js/accounts $DEPLOYPATH
+    - /bin/cp -rf assets/js/lib $DEPLOYPATH
