@@ -1,0 +1,27 @@
+{
+  "name": "attendance.webopers.com",
+  "version": "1.0.0",
+  "description": "Student attendance application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webopers/attendance.git"
+  },
+  "keywords": [
+    "attendance"
+  ],
+  "author": "Encacap - Webopers Group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webopers/attendance/issues"
+  },
+  "homepage": "https://github.com/webopers/attendance#readme",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2"
+  }
+}

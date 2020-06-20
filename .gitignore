@@ -1,0 +1,4 @@
+/.vscode
+/node_modules
+/assets/js/firebase
+.eslintrc.json
