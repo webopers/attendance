@@ -37,6 +37,8 @@ function Validator(options) {
 				}, {});
 				if (typeof options.onSubmit === "function") {
 					options.onSubmit(formValues);
+				} else {
+					formElement.submit();
 				}
 			}
 		};
@@ -85,3 +87,5 @@ Validator.isConfirmed = (selector, getConfirmValue, message) => ({
 	selector,
 	test: (value) => (value === getConfirmValue() ? undefined : message || "Nhập lại không chính xác"),
 });
+
+export { Validator as default };
