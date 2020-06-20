@@ -13,7 +13,14 @@ $exportColor: #f64e60;
 	box-sizing: border-box;
 }
 
+html {
+	width: 100%;
+	min-height: 100%;
+}
+
 body {
+	width: 100%;
+	min-height: 100%;
 	margin: 0;
 	padding: 0;
 	background-color: #fff;
