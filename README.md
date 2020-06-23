@@ -1,6 +1,4 @@
 ## Ứng dụng điểm danh học sinh
-<hr />
-
 - Bài tập kết thúc môn Phân tích thiết kế giải thuật
 - Địa chỉ: https://attendance.webopers.com
 
