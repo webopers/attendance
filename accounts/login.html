@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon" />
-		<link rel="stylesheet" href="/assets/css/base.min.css" />
-		<link rel="stylesheet" href="/assets/css/accounts.min.css" />
-		<link rel="stylesheet" href="/assets/css/font-face.min.css" />
-		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" />
-		<title>Login - Warehouse Manager</title>
-	</head>
-	<body>
-		<form action="" method="POST" class="auth" id="form">
-			<div class="auth-header">
-				<div class="auth-heading">
-					Welcome to
-					<span><a href="/">Group 8</a></span>
-				</div>
-				<div class="auth-sub-heading">
-					Đăng nhập bằng tài khoản của bạn
-				</div>
-				<div class="auth-step">
-					<div class="auth-step-item auth-step-item-active"></div>
-				</div>
-			</div>
-			<div class="auth-form">
-				<div class="input-group">
-					<div class="input-group-item">
-						<input
-							type="text"
-							name="email"
-							id="email"
-							class="input-group-item-text form-input"
-							placeholder="Địa chỉ Email"
-						/>
-						<i class="far fa-envelope input-group-item-icon input-group-item-icon-left"></i>
-						<div class="form-message">Hello</div>
-					</div>
-					<div class="input-group-item">
-						<input
-							type="password"
-							name="password"
-							id="password"
-							class="input-group-item-text form-input"
-							placeholder="Mật khẩu"
-						/>
-						<i class="far fa-key input-group-item-icon input-group-item-icon-left"></i>
-						<div class="form-message">Password error</div>
-						<div
-							class="far fa-eye-slash input-group-item-icon input-group-item-icon-right"
-							data-action="show"
-							id="show-password"
-						></div>
-					</div>
-				</div>
-				<div class="auth-form-forgot">
-					<a href="#">Forgot Password?</a>
-				</div>
-				<div class="auth-form-btn-group">
-					<button class="auth-form-btn auth-form-btn-primary" id="login">
-						<div class="auth-form-btn-spinner"></div>
-						Đăng nhập
-					</button>
-				</div>
-			</div>
-			<div class="auth-social">
-				<div class="auth-social-block auth-social-google">
-					<div class="auth-social-block-icon">
-						<i class="fab fa-google"></i>
-					</div>
-					<div class="auth-social-block-text">Sign in with Google</div>
-				</div>
-			</div>
-		</form>
-		<script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-		<script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
-		<script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-		<script defer type="module" src="/assets/js/accounts/login.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/css/base.min.css" />
+    <link rel="stylesheet" href="/assets/css/accounts.min.css" />
+    <link rel="stylesheet" href="/assets/css/font-face.min.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" />
+    <title>Login - Group 8</title>
+  </head>
+  <body>
+    <form action="" method="POST" class="auth" id="form">
+      <div class="auth-header">
+        <div class="auth-heading">
+          Welcome to
+          <span><a href="/">Group 8</a></span>
+        </div>
+        <div class="auth-sub-heading">
+          Đăng nhập bằng tài khoản của bạn
+        </div>
+        <div class="auth-step">
+          <div class="auth-step-item auth-step-item-active"></div>
+        </div>
+      </div>
+      <div class="auth-form">
+        <div class="input-group">
+          <div class="input-group-item">
+            <input
+              type="text"
+              name="email"
+              id="email"
+              class="input-group-item-text form-input"
+              placeholder="Địa chỉ Email"
+            />
+            <i class="far fa-envelope input-group-item-icon input-group-item-icon-left"></i>
+            <div class="form-message">Hello</div>
+          </div>
+          <div class="input-group-item">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="input-group-item-text form-input"
+              placeholder="Mật khẩu"
+            />
+            <i class="far fa-key input-group-item-icon input-group-item-icon-left"></i>
+            <div class="form-message">Password error</div>
+            <div
+              class="far fa-eye-slash input-group-item-icon input-group-item-icon-right"
+              data-action="show"
+              id="show-password"
+            ></div>
+          </div>
+        </div>
+        <div class="auth-form-forgot">
+          <a href="#">Forgot Password?</a>
+        </div>
+        <div class="auth-form-btn-group">
+          <button class="auth-form-btn auth-form-btn-primary" id="login">
+            <div class="auth-form-btn-spinner"></div>
+            Đăng nhập
+          </button>
+        </div>
+      </div>
+      <div class="auth-social">
+        <div class="auth-social-block auth-social-google">
+          <div class="auth-social-block-icon">
+            <i class="fab fa-google"></i>
+          </div>
+          <div class="auth-social-block-text">Sign in with Google</div>
+        </div>
+      </div>
+    </form>
+    <script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script defer type="module" src="/assets/js/accounts/login.js"></script>
+  </body>
 </html>

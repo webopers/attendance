@@ -9,23 +9,15 @@ const showPasswordBtn = document.getElementById("show-password");
 const checkLoginStatus = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      if (user.displayName === null) {
-        if (developmentEnvironment === "todos.webopers.com") window.location.href = "/information/";
-        else window.location.href = "/accounts/information.html";
-      } else {
-        firebase
-          .database()
-          .ref(`users/${user.uid}`)
-          .once("value")
-          .then((userData) => {
-            const { position: userPosition } = userData.val();
-            if (userPosition === "manager") {
-              window.location.href = "/";
-            } else {
-              window.location.href = "/shipper/";
-            }
-          });
-      }
+      const userDatabase = firebase.database().ref("users").child(user.uid);
+      userDatabase.once("value").then((data) => {
+        const userData = data.val();
+        const { position, password } = userData;
+        if (!password) {
+          window.location.href = "/accounts/change-password.html";
+        } else if (position === "manager") window.location.href = "/manager/";
+        else if (position === "school") window.location.href = "/";
+      });
     }
   });
 };
