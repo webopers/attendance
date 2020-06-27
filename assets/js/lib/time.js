@@ -8,6 +8,26 @@ const getTime = (type) => {
   if (type === "miliseconds") return date.getTime();
 };
 
-const formatTime = "";
+const getDate = (time = false) => {
+  const date = new Date();
+  return {
+    date: date.getDate(),
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
+  };
+};
 
-export { getTime, formatTime };
+const increaseMonth = (number, month, year) => {
+  const date = new Date();
+  date.setMonth(month - 1);
+  date.setFullYear(year);
+  date.setMonth(date.getMonth() + number);
+  return {
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
+  };
+};
+
+const getDaysInMonth = (month, year) => new Date(year, month, 0).getDate();
+
+export { getTime, getDate, getDaysInMonth, increaseMonth };
