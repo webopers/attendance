@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students - Group 8</title>
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.min.css" />
+    <link rel="stylesheet" href="/assets/css/font-face.min.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a href="/" class="brand">
+        <div class="brand-fancy">
+          <div class="brand-background"></div>
+        </div>
+        <div class="brand-text">Group 8</div>
+      </a>
+      <div class="header-action">
+        <div class="menu">
+          <a href="/" class="menu-item">Tổng quan</a>
+          <a href="/school/students.html" class="menu-item active">Học sinh</a>
+        </div>
+        <div class="account">
+          <div class="account-avatar">
+            <i class="fad fa-user"></i>
+          </div>
+          <div class="account-menu">
+            <div class="list-group list-group-flush">
+              <a href="/accounts/information/" class="list-group-item list-group-item-action rounded">
+                <i class="fal fa-list-ul account-icon"></i>
+                Thông tin
+              </a>
+              <div class="list-group-item list-group-item-action rounded" id="logout">
+                <i class="fal fa-sign-out account-icon"></i>
+                Đăng xuất
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="paper container-fluid d-flex">
+      <div class="col-lg-8 list">
+        <div class="list-loading list-loading-student">
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="list-loading-row">
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+            <div class="list-loading-column"></div>
+          </div>
+        </div>
+        <div class="list-header">
+          <div class="row">
+            <div class="col-4">Họ và tên</div>
+            <div class="col-2">Lớp</div>
+            <div class="col-2">Vắng</div>
+            <div class="col-2">Điện thoại</div>
+          </div>
+        </div>
+        <div class="list-group list-group-flush" id="student_container"></div>
+        <button class="btn btn-primary list-btn" id="show_add_student">+</button>
+      </div>
+      <div class="col-lg-4 chart">
+        <div class="chart-message">
+          <i class="fal fa-chart-pie-alt"></i>
+          <br />
+          Thống kê hiện chưa khả dụng
+        </div>
+      </div>
+    </div>
+    <div class="popup d-none" id="add_student_modal">
+      <div class="popup-background">
+        <div class="popup-block">
+          <div class="popup-header d-flex justify-content-between">
+            Thêm học sinh
+            <button type="button" class="close" id="hide_add_student">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="form" method="POST" action="" id="add_form">
+            <div class="form-data">
+              <div class="form-group">
+                <input type="text" name="name" id="name" class="form-input" placeholder="Họ và tên" />
+                <div class="form-icon-left">
+                  <i class="fal fa-user"></i>
+                </div>
+                <div class="form-message"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" name="class" id="class" class="form-input" placeholder="Lớp" />
+                <div class="form-icon-left">
+                  <i class="fal fa-users-class"></i>
+                </div>
+                <div class="form-message"></div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  class="form-input"
+                  placeholder="Điện thoại liên hệ"
+                />
+                <div class="form-icon-left">
+                  <i class="fal fa-phone"></i>
+                </div>
+                <div class="form-message"></div>
+              </div>
+            </div>
+            <button
+              class="form-button btn btn btn-primary btn-block d-flex align-items-center justify-content-center"
+              id="add_school_btn"
+            >
+              <div class="spinner-border spinner-border-sm text-light mr-3 d-none" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              Thêm
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="popup d-none" id="attendance_detail">
+      <div class="popup-background">
+        <div class="popup-block-full d-flex">
+          <div class="col-lg-8 list">
+            <div class="calendar">
+              <div class="calendar-header d-flex justify-content-between align-items-center">
+                <div class="calendar-info">
+                  <span id="student_name">Nguyễn Khắc Khánh</span>
+                </div>
+                <div class="calendar-action d-flex align-items-center">
+                  <span
+                    style="color: #ccc; font-weight: 500; margin: 6px 40px 2px 0;"
+                    id="calendar_date"
+                  ></span>
+                  <button type="button" class="close mt-1 mr-3" id="previous_month">
+                    <span aria-hidden="true"><i class="far fa-angle-left"></i></span>
+                  </button>
+                  <button type="button" class="close mt-1 mr-5" id="next_month">
+                    <span aria-hidden="true"><i class="far fa-angle-right"></i></span>
+                  </button>
+                  <button type="button" class="close" id="close_attendance_detail">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+              <div class="calendar-container"></div>
+            </div>
+          </div>
+          <div class="col-lg-4 chart d-flex">
+            <div class="chart-message">
+              <i class="fal fa-chart-pie-alt"></i>
+              <br />
+              Thống kê hiện chưa khả dụng
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
+    <!-- <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script> -->
+    <!-- <script src="/assets/js/lib/bootstrap.min.js"></script> -->
+    <script src="/assets/js/students.js" type="module"></script>
+  </body>
+</html>
