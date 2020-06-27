@@ -5,112 +5,112 @@ $borderColor: #ebebeb;
 $iconColor: #c1c1c1;
 
 .form {
-	input {
-		width: 100%;
-		background: none;
-		border: none;
-		outline: none;
-		padding: 21px 20px 20px 64px;
-		font-family: inherit;
-		font-size: 14px;
-	}
+  input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 21px 20px 20px 64px;
+    font-family: inherit;
+    font-size: 14px;
+  }
 
-	input:focus ~ label {
-		color: $primaryColor !important;
-	}
+  input:focus ~ label {
+    color: $primaryColor !important;
+  }
 
-	input::-webkit-input-placeholder {
-		color: #c1c1c1;
-	}
+  input::-webkit-input-placeholder {
+    color: #c1c1c1;
+  }
 
-	input:-webkit-autofill,
-	input:-webkit-autofill:hover,
-	input:-webkit-autofill:focus,
-	textarea:-webkit-autofill,
-	textarea:-webkit-autofill:hover,
-	textarea:-webkit-autofill:focus,
-	select:-webkit-autofill,
-	select:-webkit-autofill:hover,
-	select:-webkit-autofill:focus {
-		box-shadow: 0 0 0 30px #fff inset;
-	}
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    box-shadow: 0 0 0 30px #fff inset;
+  }
 
-	&-header {
-		margin: 44px 0;
-		padding: 0 0 0 0;
-		position: relative;
-	}
+  &-header {
+    margin: 44px 0;
+    padding: 0 0 0 0;
+    position: relative;
+  }
 
-	&-heading {
-		font-size: 24px;
-		font-weight: 400;
-		color: $textColor;
-		& span {
-			font-weight: 600;
-			color: $primaryColor;
-		}
-	}
+  &-heading {
+    font-size: 24px;
+    font-weight: 400;
+    color: $textColor;
+    & span {
+      font-weight: 600;
+      color: $primaryColor;
+    }
+  }
 
-	&-sub-heading {
-		font-size: 13px;
-		margin-top: 26px;
-		line-height: 1.5;
-		color: #c1c1c1;
-		font-weight: 600;
-	}
+  &-sub-heading {
+    font-size: 13px;
+    margin-top: 26px;
+    line-height: 1.5;
+    color: #c1c1c1;
+    font-weight: 600;
+  }
 
-	&-step {
-		display: flex;
-		margin-top: 36px;
-	}
+  &-step {
+    display: flex;
+    margin-top: 36px;
+  }
 
-	&-step-item {
-		width: 60px;
-		height: 3px;
-		background-color: $borderColor;
-		margin-right: 20px;
-	}
+  &-step-item {
+    width: 60px;
+    height: 3px;
+    background-color: $borderColor;
+    margin-right: 20px;
+  }
 
-	&-step-item-active {
-		background-color: $primaryColor;
-	}
+  &-step-item-active {
+    background-color: $primaryColor;
+  }
 
-	&-input-group {
-		margin-top: 70px;
-	}
+  &-input-group {
+    margin-top: 70px;
+  }
 
-	&-group {
-		position: relative;
-		margin: -1px 0 0 0;
-		border: 1px solid $borderColor;
+  &-group {
+    position: relative;
+    margin: -1px 0 0 0;
+    border: 1px solid $borderColor;
 
-		&:first-child {
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-		}
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
 
-		&:last-child {
-			border-bottom-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-		}
+    &:last-child {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
 
-		&:not(:first-child) {
-			border-top-width: 0;
-		}
-	}
+    &:not(:first-child) {
+      border-top-width: 0;
+    }
+  }
 
-	&-label {
-		position: absolute;
-		top: 19px;
-		left: 24px;
-		font-size: 18px;
-		color: $iconColor;
-		transition: 0.2s color;
-	}
+  &-label {
+    position: absolute;
+    top: 19px;
+    left: 24px;
+    font-size: 18px;
+    color: $iconColor;
+    transition: 0.2s color;
+  }
 
-	&-message {
-		display: none;
-		margin: 0 20px 20px 24px;
-		font-size: 14px;
-	}
+  &-message {
+    display: none;
+    margin: 0 20px 20px 24px;
+    font-size: 14px;
+  }
 }

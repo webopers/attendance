@@ -1,21 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Attendance - Group 8</title>
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/base.min.css" />
     <link rel="stylesheet" href="/assets/css/font-face.min.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" />
   </head>
   <body>
+    <div class="header">
+      <a href="/" class="brand">
+        <div class="brand-fancy">
+          <div class="brand-background"></div>
+        </div>
+        <div class="brand-text">Group 8</div>
+      </a>
+      <div class="header-action">
+        <div class="menu">
+          <a href="/" class="menu-item active">Tổng quan</a>
+          <a href="/school/students.html" class="menu-item">Học sinh</a>
+        </div>
+        <div class="account">
+          <div class="account-avatar">
+            <i class="fad fa-user"></i>
+          </div>
+          <div class="account-menu">
+            <div class="list-group list-group-flush">
+              <a href="/accounts/information/" class="list-group-item list-group-item-action rounded">
+                <i class="fal fa-list-ul account-icon"></i>
+                Thông tin
+              </a>
+              <div class="list-group-item list-group-item-action rounded">
+                <i class="fal fa-sign-out account-icon"></i>
+                Đăng xuất
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="paper container-fluid">
+      <div class="col-lg-8 list">
+        <div class="list-header">
+          <div class="row">
+            <div class="col-4">Trường</div>
+            <div class="col-5">Địa chỉ</div>
+            <div class="col-3">Học sinh</div>
+          </div>
+        </div>
+        <div class="list-group list-group-flush">
+          <div class="list-group-item list-group-item-action rounded">
+            <div class="row">
+              <div class="col-lg-4">Tiểu học Quang Trung</div>
+              <div class="col-lg-5">123 Đường số 1, Phường 12, Quận 12</div>
+              <div class="col-lg-1">1245</div>
+              <div class="col-lg-2 text-right">0338153193</div>
+            </div>
+          </div>
+          <div class="list-group-item list-group-item-action rounded">
+            <div class="row">
+              <div class="col-lg-4">Tiểu học Quang Trung</div>
+              <div class="col-lg-5">123 Đường số 1, Phường 12, Quận 12</div>
+              <div class="col-lg-1">1245</div>
+              <div class="col-lg-2 text-right">0338153193</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary list-btn" id="show_modal">+</button>
+      </div>
+      <div class="col-lg-4 chart"></div>
+    </div>
+    <div class="popup d-none" id="add_school_modal">
+      <div class="popup-background">
+        <div class="popup-block">
+          <div class="popup-header d-flex justify-content-between">
+            Thêm trường
+            <button type="button" class="close" id="close_modal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="form" method="POST" action="" id="add_form">
+            <div class="form-data">
+              <div class="form-group">
+                <input type="text" name="name" id="name" class="form-input" placeholder="Tên trường" />
+                <div class="form-icon-left">
+                  <i class="fal fa-user"></i>
+                </div>
+                <div class="form-message"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" name="address" id="address" class="form-input" placeholder="Địa chỉ" />
+                <div class="form-icon-left">
+                  <i class="fal fa-map-marker-alt"></i>
+                </div>
+                <div class="form-message"></div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  class="form-input"
+                  placeholder="Điện thoại liên hệ"
+                />
+                <div class="form-icon-left">
+                  <i class="fal fa-phone"></i>
+                </div>
+                <div class="form-message"></div>
+              </div>
+            </div>
+            <button
+              class="form-button btn btn btn-primary btn-block d-flex align-items-center justify-content-center"
+              id="add_school_btn"
+            >
+              <div class="spinner-border spinner-border-sm text-light mr-3 d-none" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              Thêm
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="popup d-none" id="school_result_data_modal">
+      <div class="popup-background">
+        <div class="popup-block">
+          <div class="alert alert-success mt-4" role="alert">
+            Đã thêm thành công. <br />
+            Hãy sử dụng thông tin bên dưới để truy cập vào trang quản trị của trường
+          </div>
+          <div class="form-data">
+            <div class="form-group">
+              <input type="text" id="school_email" class="form-input" placeholder="Địa chỉ Email" readonly />
+              <div class="form-icon-left">
+                <i class="fal fa-user"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" id="school_password" class="form-input" placeholder="Mật khẩu" readonly />
+              <div class="form-icon-left">
+                <i class="fal fa-map-marker-alt"></i>
+              </div>
+            </div>
+          </div>
+          <button
+            class="form-button btn btn btn-primary btn-block d-flex align-items-center justify-content-center"
+            id="close_result_school"
+          >
+            Đã xong, đóng
+          </button>
+        </div>
+      </div>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
-    <script
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
+    <!-- <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
       crossorigin="anonymous"
-    ></script>
-    <script src="/assets/js/lib/bootstrap.min.js"></script>
+    ></script> -->
+    <!-- <script src="/assets/js/lib/bootstrap.min.js"></script> -->
+    <script src="assets/js/index.js" type="module"></script>
   </body>
 </html>
