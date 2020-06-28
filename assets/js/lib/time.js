@@ -17,6 +17,12 @@ const getDate = (time = false) => {
   };
 };
 
+const convertToCustomTime = (time, format) => {
+  const date = new Date();
+  date.setTime(time);
+  if (format === "hh:mm") return { hours: date.getHours(), minutes: date.getMinutes() };
+};
+
 const increaseMonth = (number, month, year) => {
   const date = new Date();
   date.setMonth(month - 1);
@@ -30,4 +36,4 @@ const increaseMonth = (number, month, year) => {
 
 const getDaysInMonth = (month, year) => new Date(year, month, 0).getDate();
 
-export { getTime, getDate, getDaysInMonth, increaseMonth };
+export { getTime, getDate, getDaysInMonth, increaseMonth, convertToCustomTime };
