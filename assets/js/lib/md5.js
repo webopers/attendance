@@ -1,3 +1,7 @@
+import Random from "./random.js";
+
+const random = new Random();
+
 const MD5 = (string) => {
   function RotateLeft(lValue, iShiftBits) {
     return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
@@ -223,4 +227,10 @@ const MD5 = (string) => {
   return temp.toLowerCase();
 };
 
-export default MD5;
+const MD5Hash = (string) => {
+  const salt = random.string(10);
+  const hashResult = MD5(`${string}${salt}`);
+  return `${salt}.${hashResult}`;
+};
+
+export default MD5Hash;

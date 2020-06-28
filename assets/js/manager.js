@@ -114,7 +114,7 @@ const onSubmit = (data) => {
         position: "school",
         schoolID,
         password: {
-          hash: `${random.string(10, "all")}.${MD5(password)}`,
+          hash: MD5(password),
           change: false,
         },
         updated: {
