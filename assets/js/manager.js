@@ -4,10 +4,13 @@ import Validator from "./lib/validator.js";
 import Modal from "./lib/modal.js";
 import Random from "./lib/random.js";
 import { getTime } from "./lib/time.js";
+import MD5 from "./lib/md5.js";
+import SinglyLinkedList from "./lib/linked-list.js";
 
 const developmentEnvironment = window.location.href.split("/")[2] === "attendance.webopers.com";
 
 let schoolDatabase;
+const schoolLinkedList = new SinglyLinkedList();
 
 const modal = new Modal({ modalSelector: "#add_school_modal" });
 const resultModal = new Modal({ modalSelector: "#school_result_data_modal" });
@@ -16,37 +19,52 @@ const closeAddFormBtn = document.querySelector("#close_modal");
 const closeResultSchoolBtn = document.querySelector("#close_result_school");
 const showAddFormBtn = document.querySelector("#show_modal");
 const addSchoolInputs = document.querySelectorAll("[name]:not([disabled])");
+const searchSchool = document.querySelector("#search_school");
 
-const render = (data) => {
-  const containerElement = document.querySelector("#data_container");
-  while (containerElement.firstElementChild) {
-    containerElement.removeChild(containerElement.firstElementChild);
-  }
-  Object.keys(data).forEach((schoolID) => {
-    const school = data[schoolID];
-    const { name, phone, address } = school.information;
-    const { students } = school;
-    const rowElement = document.createElement("div");
+const removeElement = (school) => {
+  const removeID = schoolLinkedList.remove(school);
+  schoolDatabase.child(removeID).remove();
+  render();
+};
 
-    const dataElement = `
-      <div class="row">
-        <div class="col-lg-4">${name}</div>
-        <div class="col-lg-5">${address}</div>
-        <div class="col-lg-1">${students ? Object.keys(students).length : 0}</div>
-        <div class="col-lg-2 text-right">${phone}</div>
+const appendElement = (parentElement, schoolData) => {
+  const { name, phone, address } = schoolData.information;
+  const { students } = schoolData;
+  const rowElement = document.createElement("div");
+  const dataElement = `
+    <div class="row">
+      <div class="col-lg-4">${name}</div>
+      <div class="col-lg-5">${address}</div>
+      <div class="col-lg-1">${students ? Object.keys(students).length : 0}</div>
+      <div class="col-lg-2 text-right">
+        ${phone}
+        <button type="button" class="close ml-3" id="hide_add_student">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    `;
-    rowElement.className = "list-group-item list-group-item-action rounded";
-    rowElement.innerHTML = dataElement;
-    containerElement.prepend(rowElement);
-  });
+    </div>
+  `;
+  rowElement.addEventListener("click", () => removeElement(schoolData, parentElement, dataElement));
+  rowElement.className = "list-group-item list-group-item-action rounded";
+  rowElement.innerHTML = dataElement;
+  parentElement.appendChild(rowElement);
+};
+
+const render = () => {
+  const containerElement = document.querySelector("#data_container");
+  schoolLinkedList.print(appendElement, containerElement);
   document.querySelector(".list-loading").classList.add("d-none");
 };
 
 const getData = () => {
-  schoolDatabase.on("value", (data) => {
+  schoolDatabase.once("value").then((data) => {
     const schoolData = data.val();
-    if (schoolData) render(schoolData);
+    if (schoolData) {
+      Object.keys(schoolData).forEach((schoolID) => {
+        schoolLinkedList.insert({ id: schoolID, ...schoolData[schoolID] });
+      });
+      render();
+    }
   });
 };
 
@@ -90,16 +108,19 @@ const onSubmit = (data) => {
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
       const newSchool = firebaseSecondary.auth().currentUser;
-      const userDatabase = firebaseSecondary.database().ref("users").child(newSchool.uid);
-      const schoolDatabase = firebaseSecondary.database().ref("schools").child(schoolID);
+      const users = firebaseSecondary.database().ref("users").child(newSchool.uid);
+      const school = firebaseSecondary.database().ref("schools").child(schoolID);
       const userData = {
         position: "school",
         schoolID,
+        password: {
+          hash: `${random.string(10, "all")}.${MD5(password)}`,
+          change: false,
+        },
         updated: {
           information: time,
           password: time,
         },
-        password: false,
       };
       const schoolData = {
         information: {
@@ -112,21 +133,28 @@ const onSubmit = (data) => {
           class: 0,
         },
       };
-      userDatabase.set(userData);
-      schoolDatabase.set(schoolData);
+      users.set(userData);
+      school.set(schoolData);
       firebaseSecondary.auth().signOut();
       clearInput();
       disabledInputs(false);
       showSchoolResult(email, password);
       resultModal.show();
       modal.hide();
-      getData();
+      schoolLinkedList.insert(schoolData);
+      render();
     });
 };
 
 showAddFormBtn.onclick = () => modal.show();
 closeAddFormBtn.onclick = () => modal.hide();
 closeResultSchoolBtn.onclick = () => resultModal.hide();
+searchSchool.oninput = () => {
+  const searchValue = searchSchool.value.trim();
+  const containerElement = document.querySelector("#data_container");
+  if (searchValue.length > 0) schoolLinkedList.search(searchValue, containerElement, appendElement);
+  else render();
+};
 
 Validator({
   form: "#add_form",
