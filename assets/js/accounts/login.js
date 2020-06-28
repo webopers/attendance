@@ -13,7 +13,7 @@ const checkLoginStatus = () => {
       userDatabase.once("value").then((data) => {
         const userData = data.val();
         const { position, password } = userData;
-        if (!password) {
+        if (!password.change) {
           window.location.href = "/accounts/change-password.html";
         } else if (position === "manager") window.location.href = "/manager/";
         else if (position === "school") window.location.href = "/";

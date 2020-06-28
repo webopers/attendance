@@ -1,5 +1,7 @@
 import firebase from "../firebase/primary.js";
 import Validator from "../lib/validator.js";
+import Random from "../lib/random.js";
+import MD5 from "../lib/md5.js";
 
 const developmentEnvironment = window.location.href.split("/")[2] !== "attendance.webopers.com";
 
@@ -15,8 +17,8 @@ const checkLoginStatus = () => {
         const userData = data.val();
         const { position, password } = userData;
         userPosition = position;
-        if (password && position === "manager") window.location.href = "/manager/";
-        else if (password && position === "school") window.location.href = "/";
+        if (password.change && position === "manager") window.location.href = "/manager/";
+        else if (password.change && position === "school") window.location.href = "/";
       });
     } else if (developmentEnvironment) window.location.href = "/accounts/login.html";
     else window.location.href = "/login/";
@@ -60,6 +62,8 @@ const changeInputsStatus = (disabled, selectors, spinnerSelector) => {
   document.querySelector(spinnerSelector).style.display = disabled ? "block" : "none";
 };
 
+const random = new Random();
+
 const doChange = (formData) => {
   const user = firebase.auth().currentUser;
   const { password } = formData;
@@ -67,7 +71,10 @@ const doChange = (formData) => {
   changeInputsStatus(true, ...selectors);
   user.updatePassword(password).then(() => {
     const userPasswordStatus = firebase.database().ref("users").child(user.uid).child("password");
-    userPasswordStatus.set(true);
+    userPasswordStatus.set({
+      hash: `${random.string(10, "all")}.${MD5(password)}`,
+      change: true,
+    });
     if (userPosition === "manager") window.location.href = "/manager/";
     else if (userPosition === "school") window.location.href = "/";
   });
