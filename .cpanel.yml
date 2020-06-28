@@ -5,3 +5,5 @@ deployment:
     - /bin/cp index.html $DEPLOYPATH
     - /bin/cp -rf assets $DEPLOYPATH
     - /bin/cp -rf accounts $DEPLOYPATH
+    - /bin/cp -rf manager $DEPLOYPATH
+    - /bin/cp -rf school $DEPLOYPATH
