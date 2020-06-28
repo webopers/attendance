@@ -17,4 +17,13 @@ Random.prototype.string = function randomString(length, type = "all", prefix = "
   return string;
 };
 
+Random.prototype.phone = function randomPhone() {
+  const source = "0123456789";
+  let phone = "0";
+  for (let i = 0; i < 10; i += 1) {
+    phone += source[this.number(0, 10)];
+  }
+  return phone;
+};
+
 export default Random;
