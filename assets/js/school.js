@@ -30,7 +30,7 @@ const renderDetail = (date) => {
       };
     });
 
-    studentsAttendance = sort(studentsAttendance, "time");
+    studentsAttendance = sort(studentsAttendance, "time", "desc");
 
     while (detailContainer.firstElementChild) {
       detailContainer.removeChild(detailContainer.firstElementChild);
