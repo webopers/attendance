@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Attendance - Group 8</title>
+    <title>Overview - Group 8</title>
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/base.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.min.css?version=1.1.0" />
     <link rel="stylesheet" href="/assets/css/font-face.min.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" />
   </head>
@@ -33,7 +33,7 @@
                 <i class="fal fa-list-ul account-icon"></i>
                 Thông tin
               </a>
-              <div class="list-group-item list-group-item-action rounded">
+              <div class="list-group-item list-group-item-action rounded" id="logout">
                 <i class="fal fa-sign-out account-icon"></i>
                 Đăng xuất
               </div>
@@ -42,116 +42,157 @@
         </div>
       </div>
     </div>
-    <div class="paper container-fluid">
+    <div class="paper container-fluid d-flex">
       <div class="col-lg-8 list">
-        <div class="list-header">
-          <div class="row">
-            <div class="col-4">Trường</div>
-            <div class="col-5">Địa chỉ</div>
-            <div class="col-3">Học sinh</div>
+        <div class="list-loading list-loading-calendar d-flex">
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
+          </div>
+          <div class="calendar-block">
+            <div class="list-loading-column"></div>
           </div>
         </div>
-        <div class="list-group list-group-flush">
-          <div class="list-group-item list-group-item-action rounded">
-            <div class="row">
-              <div class="col-lg-4">Tiểu học Quang Trung</div>
-              <div class="col-lg-5">123 Đường số 1, Phường 12, Quận 12</div>
-              <div class="col-lg-1">1245</div>
-              <div class="col-lg-2 text-right">0338153193</div>
+        <div class="calendar">
+          <div class="calendar-header d-flex justify-content-between align-items-center">
+            <div class="calendar-info">
+              <span id="student_name">Thông tin điểm danh</span>
+            </div>
+            <div class="calendar-action d-flex align-items-center">
+              <span style="color: #ccc; font-weight: 500; margin: 6px 40px 2px 0;" id="calendar_date"
+                >Date</span
+              >
+              <button type="button" class="close mt-1 mr-3" id="previous_month">
+                <span aria-hidden="true"><i class="far fa-angle-left"></i></span>
+              </button>
+              <button type="button" class="close mt-1" id="next_month">
+                <span aria-hidden="true"><i class="far fa-angle-right"></i></span>
+              </button>
             </div>
           </div>
-          <div class="list-group-item list-group-item-action rounded">
-            <div class="row">
-              <div class="col-lg-4">Tiểu học Quang Trung</div>
-              <div class="col-lg-5">123 Đường số 1, Phường 12, Quận 12</div>
-              <div class="col-lg-1">1245</div>
-              <div class="col-lg-2 text-right">0338153193</div>
-            </div>
-          </div>
+          <div class="calendar-container"></div>
         </div>
-        <button class="btn btn-primary list-btn" id="show_modal">+</button>
+        <button class="btn btn-primary list-btn" id="random_attendance">
+          <i class="fal fa-random"></i>
+        </button>
       </div>
-      <div class="col-lg-4 chart"></div>
-    </div>
-    <div class="popup d-none" id="add_school_modal">
-      <div class="popup-background">
-        <div class="popup-block">
-          <div class="popup-header d-flex justify-content-between">
-            Thêm trường
-            <button type="button" class="close" id="close_modal">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form class="form" method="POST" action="" id="add_form">
-            <div class="form-data">
-              <div class="form-group">
-                <input type="text" name="name" id="name" class="form-input" placeholder="Tên trường" />
-                <div class="form-icon-left">
-                  <i class="fal fa-user"></i>
-                </div>
-                <div class="form-message"></div>
-              </div>
-              <div class="form-group">
-                <input type="text" name="address" id="address" class="form-input" placeholder="Địa chỉ" />
-                <div class="form-icon-left">
-                  <i class="fal fa-map-marker-alt"></i>
-                </div>
-                <div class="form-message"></div>
-              </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  class="form-input"
-                  placeholder="Điện thoại liên hệ"
-                />
-                <div class="form-icon-left">
-                  <i class="fal fa-phone"></i>
-                </div>
-                <div class="form-message"></div>
-              </div>
-            </div>
-            <button
-              class="form-button btn btn btn-primary btn-block d-flex align-items-center justify-content-center"
-              id="add_school_btn"
-            >
-              <div class="spinner-border spinner-border-sm text-light mr-3 d-none" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-              Thêm
-            </button>
-          </form>
+      <div class="col-lg-4 list-group p-4 d-none" id="attendance_realtime_list">
+        <div
+          class="list-group-item rounded d-flex align-items-center"
+          style="font-weight: 500; margin: 8px 0 12px 0;"
+        >
+          <div class="col-lg-6">Họ và tên</div>
+          <div class="col-lg-3">Lớp</div>
         </div>
+        <div
+          class=""
+          id="attendance_realtime_detail"
+          style="max-height: calc(100% - 70px); overflow-y: overlay;"
+        ></div>
       </div>
-    </div>
-    <div class="popup d-none" id="school_result_data_modal">
-      <div class="popup-background">
-        <div class="popup-block">
-          <div class="alert alert-success mt-4" role="alert">
-            Đã thêm thành công. <br />
-            Hãy sử dụng thông tin bên dưới để truy cập vào trang quản trị của trường
-          </div>
-          <div class="form-data">
-            <div class="form-group">
-              <input type="text" id="school_email" class="form-input" placeholder="Địa chỉ Email" readonly />
-              <div class="form-icon-left">
-                <i class="fal fa-user"></i>
-              </div>
-            </div>
-            <div class="form-group">
-              <input type="text" id="school_password" class="form-input" placeholder="Mật khẩu" readonly />
-              <div class="form-icon-left">
-                <i class="fal fa-map-marker-alt"></i>
-              </div>
-            </div>
-          </div>
-          <button
-            class="form-button btn btn btn-primary btn-block d-flex align-items-center justify-content-center"
-            id="close_result_school"
-          >
-            Đã xong, đóng
-          </button>
+      <div class="col-lg-4 chart d-flex" id="attendance_detail">
+        <div class="chart-message">
+          <i class="fal fa-chart-pie-alt"></i>
+          <br />
+          Thống kê hiện chưa khả dụng
         </div>
       </div>
     </div>
@@ -164,6 +205,6 @@
       crossorigin="anonymous"
     ></script> -->
     <!-- <script src="/assets/js/lib/bootstrap.min.js"></script> -->
-    <script src="assets/js/index.js" type="module"></script>
+    <script src="/assets/js/school.js?version=1.3.0" type="module"></script>
   </body>
 </html>
