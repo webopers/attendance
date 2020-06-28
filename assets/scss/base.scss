@@ -41,6 +41,27 @@ a:hover {
   color: $primaryColor;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $borderColorBold;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 // input {
 //   width: 100%;
 //   border: none;
@@ -208,6 +229,22 @@ a:hover {
       cursor: pointer;
     }
   }
+  &-search {
+    position: relative;
+    margin: 12px 0 24px 0;
+    &-icon {
+      position: absolute;
+      top: 1px;
+      left: 16px;
+      color: $textColorLight;
+    }
+  }
+  &-input {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0 16px 0 50px;
+  }
   &-btn {
     position: absolute;
     z-index: 2;
@@ -221,10 +258,11 @@ a:hover {
   &-loading {
     position: absolute;
     z-index: 2;
-    top: 96px;
+    top: 157px;
     left: 40px;
     width: calc(100% - 80px);
     height: calc(100% - 200px);
+    overflow: hidden;
     &-row {
       display: flex;
       height: 20px;
@@ -236,6 +274,7 @@ a:hover {
       margin-right: 20px;
       border-radius: 20px;
       background-color: $borderColor;
+      opacity: 0.6;
       overflow: hidden;
       &::before {
         content: "";
@@ -265,7 +304,7 @@ a:hover {
     }
   }
   &-loading-student {
-    top: 99px;
+    top: 159px;
     .list-loading-row {
       margin-bottom: 27px !important;
     }
@@ -288,6 +327,21 @@ a:hover {
         right: -20px;
       }
     }
+  }
+  &-loading-calendar {
+    flex-wrap: wrap;
+    top: 88px;
+    left: 32px;
+    width: calc(100% - 64px);
+    height: calc(100% - 112px);
+    .list-loading-column {
+      width: 60px;
+      margin: auto;
+    }
+  }
+  #student_container {
+    max-height: calc(100% - 124px);
+    overflow-y: overlay;
   }
 }
 
@@ -434,6 +488,9 @@ a:hover {
     border: 1px solid #dc3545;
     background-color: rgba(220, 53, 69, 0.1);
     color: #dc3545;
+  }
+  &-block:hover {
+    cursor: pointer;
   }
 }
 

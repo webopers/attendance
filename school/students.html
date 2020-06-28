@@ -6,7 +6,7 @@
     <title>Students - Group 8</title>
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon" />
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/base.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.min.css?version=1.1.0" />
     <link rel="stylesheet" href="/assets/css/font-face.min.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" />
   </head>
@@ -122,19 +122,16 @@
             <div class="list-loading-column"></div>
             <div class="list-loading-column"></div>
           </div>
-          <div class="list-loading-row">
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
-          </div>
-          <div class="list-loading-row">
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
-            <div class="list-loading-column"></div>
+        </div>
+        <div class="list-search">
+          <input
+            type="text"
+            class="list-input"
+            placeholder="Tìm kiếm học sinh bằng họ và tên"
+            id="search_student"
+          />
+          <div class="list-search-icon">
+            <i class="far fa-search"></i>
           </div>
         </div>
         <div class="list-header">
@@ -175,7 +172,7 @@
                 <div class="form-message"></div>
               </div>
               <div class="form-group">
-                <input type="text" name="class" id="class" class="form-input" placeholder="Lớp" />
+                <input type="text" name="class" id="class" class="form-input" />
                 <div class="form-icon-left">
                   <i class="fal fa-users-class"></i>
                 </div>
@@ -255,6 +252,6 @@
       crossorigin="anonymous"
     ></script> -->
     <!-- <script src="/assets/js/lib/bootstrap.min.js"></script> -->
-    <script src="/assets/js/students.js" type="module"></script>
+    <script src="/assets/js/students.js?version=1.0.0" type="module"></script>
   </body>
 </html>

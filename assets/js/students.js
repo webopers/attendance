@@ -2,20 +2,50 @@ import firebase from "./firebase/primary.js";
 import Validator from "./lib/validator.js";
 import Modal from "./lib/modal.js";
 import Random from "./lib/random.js";
-import { getTime, getDate, getDaysInMonth, increaseMonth } from "./lib/time.js";
+// eslint-disable-next-line object-curly-newline
+import { getDate, getDaysInMonth, increaseMonth, convertToCustomTime } from "./lib/time.js";
+import { sort, sortArr } from "./lib/sort.js";
 
 const developmentEnvironment = window.location.href.split("/")[2] === "attendance.webopers.com";
 
 let schoolDatabase;
 let studentCount = 0;
-let studentData;
+let studentsData;
+let classes = [];
 
 const addStudent = new Modal({ modalSelector: "#add_student_modal" });
 const attendanceDetail = new Modal({ modalSelector: "#attendance_detail" });
 const showAddStudent = document.querySelector("#show_add_student");
 const hideAddStudent = document.querySelector("#hide_add_student");
 const hideAddStudentDetail = document.querySelector("#close_attendance_detail");
+const searchStudentElement = document.querySelector("#search_student");
 const random = new Random();
+
+const removeAccents = (str) => {
+  let result = str;
+  const AccentsMap = [
+    "aàảãáạăằẳẵắặâầẩẫấậ",
+    "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+    "dđ",
+    "DĐ",
+    "eèẻẽéẹêềểễếệ",
+    "EÈẺẼÉẸÊỀỂỄẾỆ",
+    "iìỉĩíị",
+    "IÌỈĨÍỊ",
+    "oòỏõóọôồổỗốộơờởỡớợ",
+    "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+    "uùủũúụưừửữứự",
+    "UÙỦŨÚỤƯỪỬỮỨỰ",
+    "yỳỷỹýỵ",
+    "YỲỶỸÝỴ",
+  ];
+  for (let i = 0; i < AccentsMap.length; i += 1) {
+    const re = new RegExp(`[${AccentsMap[i].substr(1)}]`, "g");
+    const char = AccentsMap[i][0];
+    result = result.replace(re, char);
+  }
+  return result;
+};
 
 const clearInput = () => {
   const inputs = document.querySelectorAll("#add_form [name]:not([disabled])");
@@ -39,9 +69,10 @@ const renderAttendance = (studentID, date = undefined) => {
   nextMonth.onclick = () => renderAttendance(studentID, increaseMonth(1, month, year));
   previousMonth.onclick = () => renderAttendance(studentID, increaseMonth(-1, month, year));
 
-  const attendanceData = studentData[studentID].attendance
-    ? studentData[studentID].attendance[year][month]
-    : {};
+  let attendanceData = {};
+  if (studentsData[studentID].attendance && studentsData[studentID].attendance[year]) {
+    attendanceData = studentsData[studentID].attendance[year][month];
+  }
   const studentNameElement = document.querySelector("#student_name");
   const calendarContainer = document.querySelector(".calendar-container");
   const numberDays = getDaysInMonth(month, year);
@@ -51,18 +82,24 @@ const renderAttendance = (studentID, date = undefined) => {
   }
 
   calendarDate.innerText = `Tháng ${month}, ${year}`;
-  studentNameElement.innerText = `${studentData[studentID].name.firstName} ${studentData[studentID].name.lastName} `;
+  studentNameElement.innerText = `${studentsData[studentID].name.firstName} ${studentsData[studentID].name.lastName} `;
   for (let i = 1; i <= numberDays; i += 1) {
     const calendarBlock = document.createElement("div");
     calendarBlock.className = "calendar-block";
     calendarBlock.innerHTML = i < 10 ? `0${i}` : i;
     if (attendanceData && attendanceData[i]) {
+      const { time, temperature } = attendanceData[i];
+      const { hours, minutes } = convertToCustomTime(time, "hh:mm");
       calendarBlock.innerHTML = `
         <div class="text-center">
           ${i < 10 ? `0${i}` : i}
-          <div class="" style="font-size: 14px;">07:46 - 36.5 &deg;C</>
+          <div class="" style="font-size: 14px;">
+            ${hours}:${minutes} - 
+            ${temperature || 37.5} &deg;C
+          </div>
         </div>
       `;
+      if (temperature > 37.5) calendarBlock.classList.add("no");
       calendarBlock.classList.add("yes");
     }
     calendarContainer.appendChild(calendarBlock);
@@ -111,41 +148,67 @@ Validator({
   onSubmit,
 });
 
-const render = (data) => {
+const render = (items) => {
   const studentContainer = document.querySelector("#student_container");
+  const data = items;
   while (studentContainer.firstElementChild) {
+    studentContainer.firstElementChild.removeEventListener("click", renderAttendance);
     studentContainer.removeChild(studentContainer.firstElementChild);
   }
   studentCount = 0;
-  Object.keys(data).forEach((studentID) => {
-    const { name, class: className, phone } = data[studentID];
-    const rowElement = document.createElement("div");
-    studentCount += 1;
-    rowElement.className = "list-group-item list-group-item-action rounded";
-    rowElement.innerHTML = `
-      <div class="row d-flex align-items-center">
-        <div class="col-lg-4">${name.firstName} ${name.lastName}</div>
-        <div class="col-lg-2">${className}</div>
-        <div class="col-lg-2">0</div>
-        <div class="col-lg-2">${phone}</div>
-        <div class="col-lg-2 text-right">
-          <button class="btn btn-sm btn-light">
-            <i class="fal fa-user-edit ml-1 mr-1"></i>
-            Edit
-          </button>
-        </div>
-      </div>
-    `;
-    rowElement.onclick = () => renderAttendance(studentID);
-    studentContainer.prepend(rowElement);
+  classes.forEach((classItem) => {
+    Object.keys(data).forEach((studentID) => {
+      const { name, class: className, phone } = data[studentID];
+      if (className === classItem) {
+        const rowElement = document.createElement("div");
+        studentCount += 1;
+        rowElement.className = "list-group-item list-group-item-action rounded";
+        rowElement.innerHTML = `
+          <div class="row d-flex align-items-center">
+            <div class="col-lg-4">${name.firstName} ${name.lastName}</div>
+            <div class="col-lg-2">${className}</div>
+            <div class="col-lg-2">0</div>
+            <div class="col-lg-2">${phone}</div>
+            <div class="col-lg-2 text-right d-none">
+              <button class="btn btn-sm btn-light">
+                <i class="fal fa-user-edit ml-1 mr-1"></i>
+                Edit
+              </button>
+            </div>
+          </div>
+        `;
+        rowElement.addEventListener("click", () => renderAttendance(studentID));
+        studentContainer.appendChild(rowElement);
+      }
+    });
   });
   document.querySelector(".list-loading").classList.add("d-none");
 };
 
+searchStudentElement.oninput = () => {
+  const searchValue = removeAccents(searchStudentElement.value.toLowerCase()).trim();
+  const renderData = {};
+  if (searchValue.length > 0) {
+    Object.keys(studentsData).forEach((studentID) => {
+      const { name } = studentsData[studentID];
+      const studentName = removeAccents(`${name.firstName} ${name.lastName}`.toLowerCase());
+      if (studentName.indexOf(searchValue) !== -1) {
+        renderData[studentID] = studentsData[studentID];
+      }
+    });
+    render(renderData);
+  } else render(studentsData);
+};
+
 const getData = () => {
   schoolDatabase.child("students").on("value", (data) => {
-    studentData = data.val();
-    render(studentData);
+    studentsData = sort(data.val(), "name/lastName");
+    Object.keys(studentsData).forEach((studentID) => {
+      const className = studentsData[studentID].class;
+      if (classes.indexOf(className) === -1) classes.push(className);
+    });
+    classes = sortArr(classes);
+    render(studentsData);
   });
 };
 
