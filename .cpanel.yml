@@ -7,3 +7,4 @@ deployment:
     - /bin/cp -rf accounts $DEPLOYPATH
     - /bin/cp -rf manager $DEPLOYPATH
     - /bin/cp -rf school $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
