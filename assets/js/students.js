@@ -202,13 +202,16 @@ searchStudentElement.oninput = () => {
 
 const getData = () => {
   schoolDatabase.child("students").on("value", (data) => {
-    studentsData = sort(data.val(), "name/lastName");
-    Object.keys(studentsData).forEach((studentID) => {
-      const className = studentsData[studentID].class;
-      if (classes.indexOf(className) === -1) classes.push(className);
-    });
-    classes = sortArr(classes);
-    render(studentsData);
+    studentsData = data.val();
+    if (studentsData) {
+      sort(data.val(), "name/lastName");
+      Object.keys(studentsData).forEach((studentID) => {
+        const className = studentsData[studentID].class;
+        if (classes.indexOf(className) === -1) classes.push(className);
+      });
+      classes = sortArr(classes);
+      render(studentsData);
+    }
   });
 };
 
