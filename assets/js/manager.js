@@ -22,8 +22,9 @@ const addSchoolInputs = document.querySelectorAll("[name]:not([disabled])");
 const searchSchool = document.querySelector("#search_school");
 
 const removeElement = (school) => {
-  const removeID = schoolLinkedList.remove(school);
-  schoolDatabase.child(removeID).remove();
+  schoolLinkedList.remove(school);
+  // const removeID = schoolLinkedList.remove(school);
+  // schoolDatabase.child(removeID).remove();
   render();
 };
 
