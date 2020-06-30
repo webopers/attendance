@@ -1,6 +1,5 @@
 import firebase from "../firebase/primary.js";
 import Validator from "../lib/validator.js";
-import Random from "../lib/random.js";
 import MD5 from "../lib/md5.js";
 
 const developmentEnvironment = window.location.href.split("/")[2] !== "attendance.webopers.com";
@@ -47,13 +46,6 @@ const onShowPasswordBtnClicked = (event) => {
   }
 };
 
-// const showError = (inputSelector, message) => {
-//   const { parentElement } = document.querySelector(inputSelector);
-//   parentElement.classList.add("invalid");
-//   parentElement.querySelector(".form-message").innerText = message;
-//   parentElement.querySelector(".form-input").focus();
-// };
-
 const changeInputsStatus = (disabled, selectors, spinnerSelector) => {
   selectors.forEach((selector) => {
     const inputElement = document.querySelector(selector);
@@ -61,8 +53,6 @@ const changeInputsStatus = (disabled, selectors, spinnerSelector) => {
   });
   document.querySelector(spinnerSelector).style.display = disabled ? "block" : "none";
 };
-
-const random = new Random();
 
 const doChange = (formData) => {
   const user = firebase.auth().currentUser;
@@ -72,7 +62,7 @@ const doChange = (formData) => {
   user.updatePassword(password).then(() => {
     const userPasswordStatus = firebase.database().ref("users").child(user.uid).child("password");
     userPasswordStatus.set({
-      hash: `${random.string(10, "all")}.${MD5(password)}`,
+      hash: MD5(password),
       change: true,
     });
     if (userPosition === "manager") window.location.href = "/manager/";
